@@ -14,7 +14,7 @@ namespace Headquarters.VM
         public PlayerViewModel(PlayerService playerService)
         {
             _playerService = playerService;
-            Players = _playerService.GetPlayers();
+            Players = _playerService.Players;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Model.DTO
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Nick { get; set; }
+        public string Faction { get; set; }
 
         /*public PlayerDto()
         {
@@ -20,6 +21,13 @@ namespace Model.DTO
             Id = id;
             UserId = userId;
             Nick = nick;
+        }
+
+        public PlayerDto(Player player)
+        {
+            Id = player.Id;
+            UserId = player.UserId;
+            Nick = player.Nick;
         }
     }
 }

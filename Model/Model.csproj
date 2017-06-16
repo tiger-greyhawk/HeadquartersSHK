@@ -57,10 +57,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converter\ConverterJson.cs" />
     <Compile Include="Converter\Mapper.cs" />
+    <Compile Include="DAO\FactionDao.cs" />
+    <Compile Include="DAO\FactionPlayerDao.cs" />
     <Compile Include="DAO\PlayerDao.cs" />
+    <Compile Include="DTO\FactionDto.cs" />
+    <Compile Include="Entity\Faction.cs" />
+    <Compile Include="Entity\FactionPlayer.cs" />
     <Compile Include="REST\RestClient.cs" />
+    <Compile Include="Service\FactionPlayerService.cs" />
+    <Compile Include="Service\FactionService.cs" />
     <Compile Include="Service\PlayerService.cs" />
+    <Compile Include="Setting\ApiPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\PlayerDto.cs" />
