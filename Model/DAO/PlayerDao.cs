@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Model.Converter;
 using Model.Entity;
@@ -7,29 +8,31 @@ using Model.Setting;
 
 namespace Model.DAO
 {
-    public class PlayerDao
+    public interface IPlayerDao
     {
-        //private IEnumerable<Player> _players;
+        List<Player> FindAll();
+        List<Player> FindById(int id);
+    }
+
+    public class PlayerDao : IPlayerDao
+    {
         private readonly RestClient _restClient;
         private readonly ConverterJson _converterJson;
 
-
-        public PlayerDao(RestClient restClient)
+        public PlayerDao(RestClient restClient, ConverterJson converterJson)
         {
             _restClient = restClient;
-            _converterJson = new ConverterJson();
-            //_players = new List<Player>();
+            _converterJson = converterJson;
         }
 
-        public IEnumerable<Player> GetPlayers()
+        public List<Player> FindAll()
         {
-            //return _players;
-            return _converterJson.ConvertJsonToPlayers(_restClient.DoGet("player/"));
+            return new List<Player>(_converterJson.ConvertJsonToPlayers(_restClient.DoGet("player/")));
         }
 
-        /*public void UpdatePlayers()
+        public List<Player> FindById(int id)
         {
-            _players = _converterJson.ConvertJsonToPlayers(_restClient.DoGet("player/"));
-        }*/
+            return new List<Player>(_converterJson.ConvertJsonToPlayers(_restClient.DoGet("player/" + id)));
+        }
     }
 }
