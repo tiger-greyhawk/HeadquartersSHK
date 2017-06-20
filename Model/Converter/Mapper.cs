@@ -9,12 +9,12 @@ using Model.Service;
 
 namespace Model.Converter
 {
-    public interface Mapper<A, B>
+    public interface Converter<A, B>
     {
         B convert(A o);
     }
 
-    public class ObservableCollectionPlayerMapper : Mapper<List<PlayerDto>, ObservableCollection<PlayerDto>>
+    public class ObservableCollectionPlayerMapper : Converter<List<PlayerDto>, ObservableCollection<PlayerDto>>
     {
         public ObservableCollection<PlayerDto> convert(List<PlayerDto> o)
         {
@@ -22,18 +22,22 @@ namespace Model.Converter
         }
     }
 
-    public class PlayerMapper : Mapper<Player, PlayerDto>, Mapper<PlayerDto, Player>
+    public class PlayerConverter : Converter<Player, PlayerDto>, Converter<PlayerDto, Player>
     {
-        public PlayerDto convert(Player o)
+        public PlayerDto convert(Player player)
         {
-            throw new NotImplementedException();
+            PlayerDto playerDto = new PlayerDto(player.Id, player.UserId, player.Nick);
+            return playerDto;
         }
 
-        public Player convert(PlayerDto o)
+        public Player convert(PlayerDto playerDto)
         {
-            throw new NotImplementedException();
+            Player player = new Player(playerDto.Id, playerDto.UserId, playerDto.Nick);
+            return player;
         }
     }
+
+    
 
     public class Mapper
     {

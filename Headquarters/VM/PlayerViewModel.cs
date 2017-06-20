@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Model.DTO;
 using System.Collections.ObjectModel;
+using Headquarters.Facade;
 using Model.Converter;
 using Model.Entity;
 using Model.Service;
@@ -11,21 +12,22 @@ namespace Headquarters.VM
     public class PlayerViewModel
     {
         public ObservableCollection<PlayerDto> Players { get; }
-        private PlayerService _playerService;
+        //private readonly IPlayerService _playerService;
+        private readonly IPlayerVmFacade _playerVmFacade;
 
-        public PlayerViewModel(PlayerService playerService)
+        public PlayerViewModel(IPlayerVmFacade playerVmFacade)
         {
-            _playerService = playerService;
-            Players = Collect(_playerService.FindAllPlayers());
+            _playerVmFacade = playerVmFacade;
+            Players = Collect(_playerVmFacade.FindPlayers());
+            //Players = Collect(_playerService.GetAllPlayers());
         }
 
-        private ObservableCollection<PlayerDto> Collect(List<Player> players)
+        private ObservableCollection<PlayerDto> Collect(List<PlayerDto> playerDtos)
         {
-            PlayerMapper mapper = new PlayerMapper();
             ObservableCollection<PlayerDto> result = new ObservableCollection<PlayerDto>();
-            foreach (Player player in players)
+            foreach (PlayerDto playerDto in playerDtos)
             {
-                result.Add(mapper.convert(player));
+                result.Add(playerDto);
             }
             return result;
         }

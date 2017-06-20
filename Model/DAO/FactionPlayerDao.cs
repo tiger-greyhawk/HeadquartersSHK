@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Model.Converter;
 using Model.DTO;
 using Model.Entity;
@@ -9,15 +10,19 @@ namespace Model.DAO
 {
     public interface IFactionPlayerDao
     {
+        List<FactionPlayer> GetAll();
+        
         /**
          * Recieves faction id, returns list of player ids in that faction.
          */
-        List<FactionPlayer> FindByFactionId(int factionId);
+            List<FactionPlayer> GetByFactionId(int factionId);
 
         /**
          * Recieves a list of faction ids, returns a map of faction id to lists of player ids for that factions.
          */
-        Dictionary<FactionPlayer, List<FactionPlayer>> FindByFactionIds(List<int> factionIds);
+        Dictionary<int, List<FactionPlayer>> FindByFactionIds(List<int> factionIds);
+
+        //FactionPlayer GetByPlayerId(int playerId);
     }
 
     public class FactionPlayerDao : IFactionPlayerDao
@@ -32,19 +37,19 @@ namespace Model.DAO
             
         }
 
-        public List<FactionPlayer> FindByFactionId(int factionId)
+        public List<FactionPlayer> GetAll()
         {
-            throw new NotImplementedException();
+            return _converterJson.ConvertJsonToFactionPlayers(_restClient.DoGet("faction-player/all/")).ToList();
+        }
+
+        public List<FactionPlayer> GetByFactionId(int factionId)
+        {
+            return _converterJson.ConvertJsonToFactionPlayers(_restClient.DoGet("faction-player/"+factionId)).ToList();
         }
 
         public Dictionary<int, List<FactionPlayer>> FindByFactionIds(List<int> factionIds)
         {
             throw new NotImplementedException();
-        }
-
-        public IEnumerable<FactionPlayer> GetFactionPlayers()
-        {
-            return _converterJson.ConvertJsonToFactionPlayers(_restClient.DoGet("faction-player/all/"));
         }
     }
 }

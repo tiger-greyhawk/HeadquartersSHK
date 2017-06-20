@@ -9,7 +9,7 @@ namespace Model.DAO
 
     public interface IFactionDao
     {
-        List<Faction> FindAll();
+        List<Faction> GetAll();
     }
 
     public class FactionDao : IFactionDao
@@ -23,7 +23,7 @@ namespace Model.DAO
             _converterJson = converterJson;
         }
 
-        public List<Faction> FindAll()
+        public List<Faction> GetAll()
         {
             return new List<Faction>(_converterJson.ConvertJsonToFactions(_restClient.DoGet("faction/")));
         }

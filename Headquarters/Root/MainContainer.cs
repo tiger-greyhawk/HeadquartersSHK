@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Interop;
+using Headquarters.Facade;
 using Headquarters.VM;
 using Model.Converter;
 using Model.DAO;
@@ -17,10 +18,16 @@ namespace Headquarters.Root
         public IWindow ResolveWindow()
         {
             RestClient restClient = new RestClient();
-            PlayerDao playerDao = new PlayerDao(restClient);
+            ConverterJson converterJson = new ConverterJson();
+            IPlayerDao playerDao = new PlayerDao(restClient, converterJson);
+            IFactionDao factionDao = new FactionDao(restClient, converterJson);
+            IFactionPlayerDao factionPlayerDao = new FactionPlayerDao(restClient, converterJson);
             Mapper mapper = new Mapper();
-            PlayerService playerService = new PlayerService(playerDao, mapper);
-            PlayerViewModel playerViewModel = new PlayerViewModel(playerService);
+            IPlayerService playerService = new PlayerService(playerDao);
+            IFactionService factionService = new FactionService(factionDao);
+            IFactionPlayerService factionPlayerService = new FactionPlayerService(factionPlayerDao);
+            IPlayerVmFacade playerVmFacade = new PlayerVmFacade(factionPlayerService, factionService, playerService);
+            PlayerViewModel playerViewModel = new PlayerViewModel(playerVmFacade);
             ViewModelFactory vmFactory = new ViewModelFactory(playerViewModel);
 
             Window main = new Main();

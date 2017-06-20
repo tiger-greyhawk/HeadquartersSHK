@@ -70,6 +70,7 @@
     <Compile Include="Service\FactionPlayerService.cs" />
     <Compile Include="Service\FactionService.cs" />
     <Compile Include="Service\FactionVMFacade.cs" />
+    <Compile Include="Service\IService.cs" />
     <Compile Include="Service\PlayerService.cs" />
     <Compile Include="Setting\ApiPath.cs" />
   </ItemGroup>

@@ -9,6 +9,17 @@ namespace Model.Entity
         private int _userId;
         private string _nick;
 
+        public Player()
+        {
+        }
+
+        public Player(int id, int userId, string nick)
+        {
+            _id = id;
+            _userId = userId;
+            _nick = nick;
+        }
+
         public int Id
         {
             get { return _id; }

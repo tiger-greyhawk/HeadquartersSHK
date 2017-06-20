@@ -10,7 +10,7 @@ namespace Model.DAO
 {
     public interface IPlayerDao
     {
-        List<Player> FindAll();
+        List<Player> GetAll();
         List<Player> FindById(int id);
     }
 
@@ -25,7 +25,7 @@ namespace Model.DAO
             _converterJson = converterJson;
         }
 
-        public List<Player> FindAll()
+        public List<Player> GetAll()
         {
             return new List<Player>(_converterJson.ConvertJsonToPlayers(_restClient.DoGet("player/")));
         }
