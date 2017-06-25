@@ -5,37 +5,35 @@ namespace Model.Entity
     [DataContract]
     public class Player
     {
-        private int _id;
-        private int _userId;
-        private string _nick;
+        [DataMember] private int id;
+        [DataMember] private int userId;
+        [DataMember] private string nick;
 
-        public Player()
-        {
-        }
+
 
         public Player(int id, int userId, string nick)
         {
-            _id = id;
-            _userId = userId;
-            _nick = nick;
+            id = id;
+            userId = userId;
+            nick = nick;
         }
 
         public int Id
         {
-            get { return _id; }
-            set { _id = value; }
+            get { return id; }
+            set { id = value; }
         }
 
         public int UserId
         {
-            get { return _userId; }
-            set { _userId = value; }
+            get { return userId; }
+            set { userId = value; }
         }
 
         public string Nick
         {
-            get { return _nick; }
-            set { _nick = value; }
+            get { return nick; }
+            set { nick = value; }
         }
     }
 }

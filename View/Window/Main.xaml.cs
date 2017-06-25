@@ -18,9 +18,32 @@ namespace View.Window
     /// </summary>
     public partial class Main : System.Windows.Window
     {
+        private bool _connectCheck = false;
+
+        public bool ConnectCheck
+        {
+            get { return _connectCheck; }
+            set { _connectCheck = value; }
+        }
+
         public Main()
         {
             InitializeComponent();
+        }
+
+        private void ConnectImage_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (_connectCheck)
+            {
+
+                //ConnectImage.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ViewCommunityHelper;component/Icons/connect.png"));
+                //_connectCheck = false;
+            }
+            else
+            {
+                //ConnectImage.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ViewCommunityHelper;component/Icons/disconnect.png"));
+                //_connectCheck = true;
+            }
         }
     }
 }

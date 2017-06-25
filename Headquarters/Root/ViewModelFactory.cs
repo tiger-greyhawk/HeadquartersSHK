@@ -6,23 +6,42 @@ namespace Headquarters.Root
 {
     public class ViewModelFactory
     {
-        private readonly PlayerViewModel _playerViewModel;
+        private readonly IMainViewModel _mainViewModel;
+        //private readonly PlayerViewModel _playerViewModel;
 
-        public ViewModelFactory(PlayerViewModel playerViewModel)
+        public ViewModelFactory(IMainViewModel mainViewModel)//, PlayerViewModel playerViewModel)
         {
-            _playerViewModel = playerViewModel;
+            _mainViewModel = mainViewModel;
+            //_playerViewModel = playerViewModel;
         }
 
+        public IMainViewModel Prepare(IWindow window)
+        {
+            if (window == null)
+            {
+                throw new ArgumentNullException(nameof(window));
+            }
+            _mainViewModel.PrepareWindow(window);
+            return _mainViewModel;
+        }
 
-
-
-        public MainViewModel CreatePlayerVM(IWindow window)
+        /*public MainViewModel Create(IWindow window)
         {
             if (window == null)
             {
                 throw new ArgumentNullException(nameof(window));
             }
             return new MainViewModel(window, _playerViewModel);
-        }
+        }*/
+
+
+        /*public MainViewModel CreatePlayerVM(IWindow window)
+        {
+            if (window == null)
+            {
+                throw new ArgumentNullException(nameof(window));
+            }
+            return new MainViewModel(window, _playerViewModel);
+        }*/
     }
 }

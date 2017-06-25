@@ -30,6 +30,7 @@ namespace Model.Service
 
         public List<Player> GetAllPlayers()
         {
+            //_players = _playerDao.FindAll("player");
             _players = _playerDao.GetAll();
             return _players.ToList();
         }

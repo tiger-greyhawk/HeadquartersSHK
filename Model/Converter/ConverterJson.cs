@@ -6,8 +6,25 @@ using Model.Entity;
 
 namespace Model.Converter
 {
-    public class ConverterJson
+    public interface IConverterJson<A, B>
     {
+        B Convert(string dataToSerialize, A o);
+    }
+
+    public class ConverterJson: IConverterJson<IEnumerable<Player>, IEnumerable<Player>>, IConverterJson<IEnumerable<Faction>,IEnumerable<Faction>>
+    {
+        public IEnumerable<Player> Convert(string dataToSerialize, IEnumerable<Player> players)
+        {
+            players = ConvertJsonToPlayers(dataToSerialize);
+            return players;
+        }
+
+        public IEnumerable<Faction> Convert(string dataToSerialize, IEnumerable<Faction> result)
+        {
+            result = ConvertJsonToFactions(dataToSerialize);
+            return result;
+        }
+
         public Player ConvertJsonToPlayer(string dataToSerialize)
         {
          
@@ -22,7 +39,7 @@ namespace Model.Converter
             {
                 //Console.WriteLine(e);
                 //throw;
-                clear = new Player();
+                clear = new Player(0,0,"");
             }
             //Player clear = (Player)json.ReadObject(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(dataToSerialize)));
             return clear;
@@ -30,8 +47,8 @@ namespace Model.Converter
 
         public IEnumerable<Player> ConvertJsonToPlayers(string dataToSerialize)
         {
-            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(Player));
-            List<Player> clear;
+            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(List<Player>));
+            List<Player> clear = new List<Player>();
             try
             {
                 clear = (List<Player>)json.ReadObject(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(dataToSerialize)));
@@ -45,7 +62,7 @@ namespace Model.Converter
 
         public IEnumerable<FactionPlayer> ConvertJsonToFactionPlayers(string dataToSerialize)
         {
-            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(FactionPlayer));
+            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(List<FactionPlayer>));
             List<FactionPlayer> clear;
             try
             {
@@ -59,7 +76,7 @@ namespace Model.Converter
         }
         public IEnumerable<Faction> ConvertJsonToFactions(string dataToSerialize)
         {
-            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(Faction));
+            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(List<Faction>));
             List<Faction> clear;
             try
             {

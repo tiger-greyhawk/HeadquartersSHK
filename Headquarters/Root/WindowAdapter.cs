@@ -8,6 +8,7 @@ namespace Headquarters.Root
     public class WindowAdapter : Window, IWindow
     {
         private readonly Window _window;
+        
 
         public WindowAdapter(Window window)
         {
@@ -19,7 +20,7 @@ namespace Headquarters.Root
         }
 
         #region IWindow Members
-        public virtual void Close()
+        public new virtual void Close()
         {
             base.Close();
             base.OnClosed(EventArgs.Empty);
@@ -33,23 +34,23 @@ namespace Headquarters.Root
             return new WindowAdapter(window);
         }
 
-        /*
-        public virtual IWindow CreateChild(IWindow window, object viewModel)
+        
+        /*public virtual IWindow CreateChild(IWindow window, object viewModel)
         {
             Window cw = (Window)window;
             cw.Owner = this._window;
             cw.DataContext = viewModel;
             WindowAdapter.ConfigureBehavior(cw);
             return new WindowAdapter(cw);
-        }
-        */
+        }*/
+        
 
-        public virtual void Show()
+        public new virtual void Show()
         {
             this._window.Show();
         }
 
-        public virtual bool? ShowDialog()
+        public new virtual bool? ShowDialog()
         {
             return this._window.ShowDialog();
         }
@@ -68,7 +69,9 @@ namespace Headquarters.Root
         private static void ConfigureBehaviorByVM(Window window)
         {
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            //window.CommandBindings.Add(new CommandBinding(PresentationCommands.Accept, (sender, e) => window.DialogResult = true));
+            window.CommandBindings.Add(new CommandBinding(ViewCommand.Accept, (sender, e) => window.DialogResult = true));
         }
+
+
     }
 }

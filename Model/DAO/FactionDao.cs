@@ -25,7 +25,7 @@ namespace Model.DAO
 
         public List<Faction> GetAll()
         {
-            return new List<Faction>(_converterJson.ConvertJsonToFactions(_restClient.DoGet("faction/")));
+            return new List<Faction>(_converterJson.ConvertJsonToFactions(_restClient.DoGet("faction")));
         }
 
     }

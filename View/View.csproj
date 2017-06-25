@@ -56,8 +56,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\ViewCommand.cs" />
     <Compile Include="Window\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\PlayersWindow.xaml.cs">
+      <DependentUpon>PlayersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\RegisterNewUserWindow.xaml.cs">
+      <DependentUpon>RegisterNewUserWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -85,10 +92,46 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\lang.en-US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\lang.ru-RU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Window\PlayersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\RegisterNewUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\Icon\cog.png" />
+    <Resource Include="Media\Icon\connect.png" />
+    <Resource Include="Media\Icon\cross.png" />
+    <Resource Include="Media\Icon\database.png" />
+    <Resource Include="Media\Icon\disconnect.png" />
+    <Resource Include="Media\Icon\group.png" />
+    <Resource Include="Media\Icon\information.png" />
+    <Resource Include="Media\Icon\lorry.png" />
+    <Resource Include="Media\Icon\lorry_add.png" />
+    <Resource Include="Media\Icon\lorry_delete.png" />
+    <Resource Include="Media\Icon\lorry_flatbed.png" />
+    <Resource Include="Media\Icon\lorry_go.png" />
+    <Resource Include="Media\Icon\monitor_link.png" />
+    <Resource Include="Media\Icon\world.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

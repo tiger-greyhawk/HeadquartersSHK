@@ -23,6 +23,7 @@ namespace Model.Service
         {
             _factionDao = factionDao;
             _factions = new List<Faction>();
+            GetAllFactions();
         }
 
         public List<Faction> GetAllFactions()

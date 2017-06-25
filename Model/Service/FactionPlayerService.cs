@@ -18,6 +18,7 @@ namespace Model.Service
 
     public class FactionPlayerService : IFactionPlayerService
     {
+        //private bool _initialized;
         private readonly IFactionPlayerDao _factionPlayerDao;
         private IEnumerable<FactionPlayer> _factionPlayers;
 
@@ -25,7 +26,15 @@ namespace Model.Service
         {
             _factionPlayerDao = factionPlayerDao;
             _factionPlayers = new List<FactionPlayer>();
+            GetAll();
+            //_initialized = false;
         }
+
+        /*public bool Initialized
+        {
+            get { return _initialized; }
+            set { _initialized = value; }
+        }*/
 
         public List<FactionPlayer> GetAll()
         {

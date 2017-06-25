@@ -5,9 +5,9 @@ namespace Model.Entity
     [DataContract]
     public class FactionPlayer
     {
-        private int id;
-        private int playerId;
-        private int factionId;
+        [DataMember] private int id;
+        [DataMember] private int playerId;
+        [DataMember] private int factionId;
 
         public FactionPlayer()
         {

@@ -9,7 +9,12 @@ using Model.Service;
 
 namespace Headquarters.VM
 {
-    public class PlayerViewModel
+    public interface IPlayerViewModel
+    {
+        
+    }
+
+    public class PlayerViewModel : IPlayerViewModel
     {
         public ObservableCollection<PlayerDto> Players { get; }
         //private readonly IPlayerService _playerService;

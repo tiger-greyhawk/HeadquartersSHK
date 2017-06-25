@@ -56,12 +56,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Facade\FactionVMFacade.cs" />
     <Compile Include="Facade\PlayerVmFacade.cs" />
+    <Compile Include="Root\RelayCommand.cs" />
     <Compile Include="Root\ViewModelFactory.cs" />
     <Compile Include="Root\MainWindowAdapter.cs" />
     <Compile Include="Root\WindowAdapter.cs" />
     <Compile Include="VM\MainViewModel.cs" />
     <Compile Include="VM\PlayerViewModel.cs" />
+    <Compile Include="VM\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Root\MainContainer.cs" />

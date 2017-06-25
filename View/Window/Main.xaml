@@ -4,9 +4,121 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View.Window"
+        xmlns:command="clr-namespace:View"
+        xmlns:view="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Main" Height="300" Width="300">
+        Title="{DynamicResource MainTitle}" Height="500" Width="250" MaxWidth="300">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
+                <!-- Первое меню (а-ля файл) -->
+                <MenuItem Width="30">
+                    <MenuItem.Icon>
+                        <Image Source="/View;component/Media/Icon/database.png"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Connect" Command="{Binding Path=DoConnectCommand }"
+                              MouseEnter="ConnectImage_MouseEnter" MouseLeave="ConnectImage_MouseEnter">
+                        <MenuItem.Icon>
+                            <Image Name="ConnectImage" Source="{Binding Path=ConnectImage.Source}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="New User" Command="{Binding Path=ShowRegisterNewUserWindowCommand }">
+                        <MenuItem.Icon>
+                            <Image Source="/View;component/Media/Icon/cross.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem Header="Exit" Command="{Binding Path=ExitCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="/View;component/Media/Icon/cross.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <!-- Меню с выбором функционала (Ресурсы, Шаблоны построений, ТаймАтаки) -->
+                <MenuItem Width="30">
+                    <MenuItem.Icon>
+                        <Image Source="/View;component/Media/Icon/monitor_link.png"/>
+                    </MenuItem.Icon>
+                    <!--                    <MenuItem Header="Resources" Click="MenuItem_Click">-->
+
+                    <MenuItem Header="Resources" Command="{Binding Path=ShowGameFunctionalWindowCommand}"  IsEnabled="{Binding Path=Auth.ConnectionProperties.Connected}">
+                        <MenuItem.ToolTip>Resources</MenuItem.ToolTip>
+                        <!--<MenuItem Header="Resources" Command="{Binding Path=AddRR}" >    -->
+                        <MenuItem.Icon>
+                            <Image Source="/View;component/Media/Icon/lorry.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Factions" Command="{Binding Path=ShowFactionsWindowCommand}" IsEnabled="{Binding Path=Auth.ConnectionProperties.Connected}">
+                        <MenuItem.ToolTip>Resources</MenuItem.ToolTip>
+                        <MenuItem.Icon>
+                            <Image Source="/View;component/Media/Icon/group.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                        <MenuItem Header="Players" Command="{Binding Path=ShowPlayersWindowCommand}">
+<!--                    <MenuItem Header="Players" Command="{Binding Path=ShowPlayersWindowCommand}" IsEnabled="{Binding Path=Auth.ConnectionProperties.Connected}">-->
+                        <MenuItem.ToolTip>Show Players</MenuItem.ToolTip>
+                        <MenuItem.Icon>
+                            <Image Source="/View;component/Media/Icon/group.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <!-- Опции -->
+                <MenuItem Width="30">
+                    <MenuItem.Icon>
+                        <Image Source="/View;component/Media/Icon/cog.png"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="{DynamicResource MOptions}" Command="{Binding Path=ShowOptionsWindowCommand}" >
+                        <MenuItem.Icon>
+                            <Image Source="/View;component/Media/Icon/cog.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MSettingMyPlayers}" Command="{Binding Path=ShowSettingMyPlayersWindowCommand}" >
+                        <MenuItem.Icon>
+                            <Image Source="/View;component/Media/Icon/cog.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <!-- О программе/справка -->
+                <MenuItem Width="30">
+                    <MenuItem.Icon>
+                        <Image Source="/View;component/Media/Icon/information.png"/>
+                    </MenuItem.Icon>
+                    <MenuItem  Header="{DynamicResource MAbout}">
+                    </MenuItem>
+                    <MenuItem  Header="{DynamicResource MHelp}">
+                    </MenuItem>
+
+                </MenuItem>
+                <MenuItem Width="30"
+                ItemsSource="{Binding Path=MenuLanguage}">
+                    <MenuItem.Icon>
+                        <Image Source="/View;component/Media/Icon/world.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </Menu>
+
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="2">
+            <StackPanel>
+                <Ellipse HorizontalAlignment="Left" Width="20" Height="20" Fill="{Binding Path=ConnectedStatusColor}" ></Ellipse>
+            </StackPanel>
+            <!--<ListBox ItemsSource="{Binding Path=RequestResourceViewModelCollection.RequestResourceVM, UpdateSourceTrigger=PropertyChanged}" >
+            </ListBox>-->
+
+            <!--<CheckBox IsChecked="{Binding Path=Connected, UpdateSourceTrigger=PropertyChanged}"></CheckBox>-->
+
+        </Grid>
     </Grid>
 </Window>

@@ -1,17 +1,51 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
 using Model.Entity;
 
 namespace Model.REST
 {
-    public class RestClient
+    public class RestClient : IDisposable
     {
+        private ConnectionProperties _connectionProperties;
+
+        public RestClient(ConnectionProperties connectionProperties)
+        {
+            _connectionProperties = connectionProperties;
+        }
+
+        public ConnectionProperties ConnectionProperties
+        {
+            get { return _connectionProperties; }
+        }
+
+        public HttpWebRequest PrepareRequest(HttpWebRequest request)
+        {
+            //request.CookieContainer = new CookieContainer();
+            //request.CookieContainer.Add(ConnectionProperties.SCookieCollection);
+            request.ContentType = "application/json;charset=UTF-8";
+            request.Method = "GET";
+            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; rv:47.0) Gecko/20100101 Firefox/47.0";
+            return request;
+        }
+
+        public HttpWebRequest PrepareBasicAuth(HttpWebRequest request, String userName, String userPassword)
+        {
+            string authInfo = userName + ":" + userPassword;
+            authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
+            request.Headers["Authorization"] = "Basic " + authInfo;
+            return request;
+        }
+
         public string DoGet(string url)
         {
             //return Task.Factory.StartNew(() =>
             //{
                 string result = "";
-                /*if (ConnectionProperties.Connected)
+                //if (ConnectionProperties.Connected)
 
                     using (this)
 
@@ -36,7 +70,7 @@ namespace Model.REST
                             var response = (HttpWebResponse)request.GetResponse();
                             //request.BeginGetResponse(new AsyncCallback(OnResponse), request);
                             System.Net.ServicePointManager.Expect100Continue = false;
-                            ConnectionProperties.SCookieCollection.Add(response.Cookies);
+                            //ConnectionProperties.SCookieCollection.Add(response.Cookies);
                             Stream data = (Stream)response.GetResponseStream();
                             StreamReader reader = new StreamReader(data, Encoding.UTF8);
                             //DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(List<Player>));
@@ -50,8 +84,24 @@ namespace Model.REST
                             result = null;
                             //throw;
                         }
-                    }*/
+                    }
                 return result;
+        }
+
+        public void Dispose()
+        {
+
+            OnDispose();
+        }
+
+        protected virtual void OnDispose()
+        {
+            //throw new NotImplementedException("Dispose");
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+
         }
     }
 }

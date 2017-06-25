@@ -64,12 +64,14 @@
     <Compile Include="DAO\FactionPlayerDao.cs" />
     <Compile Include="DAO\PlayerDao.cs" />
     <Compile Include="DTO\FactionDto.cs" />
+    <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Entity\Faction.cs" />
     <Compile Include="Entity\FactionPlayer.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="REST\ConnectionProperties.cs" />
     <Compile Include="REST\RestClient.cs" />
     <Compile Include="Service\FactionPlayerService.cs" />
     <Compile Include="Service\FactionService.cs" />
-    <Compile Include="Service\FactionVMFacade.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\PlayerService.cs" />
     <Compile Include="Setting\ApiPath.cs" />
@@ -94,6 +96,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

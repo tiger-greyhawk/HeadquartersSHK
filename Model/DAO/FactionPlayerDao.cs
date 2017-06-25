@@ -39,7 +39,7 @@ namespace Model.DAO
 
         public List<FactionPlayer> GetAll()
         {
-            return _converterJson.ConvertJsonToFactionPlayers(_restClient.DoGet("faction-player/all/")).ToList();
+            return _converterJson.ConvertJsonToFactionPlayers(_restClient.DoGet("faction-player/all")).ToList();
         }
 
         public List<FactionPlayer> GetByFactionId(int factionId)
