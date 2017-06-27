@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Model.Entity;
+using Model.Setting;
 
 namespace Model.REST
 {
@@ -86,6 +87,43 @@ namespace Model.REST
                         }
                     }
                 return result;
+        }
+
+        public string DoPostAsync(string json, string url)
+        {
+            string result = "";
+            if (ConnectionProperties.Connected)
+            {
+                HttpWebRequest request =
+                    (HttpWebRequest)WebRequest.Create(this._connectionProperties.UrlServer + url + "?_type=json");
+                request = PrepareRequest(request);
+                request = PrepareBasicAuth(request, ConnectionProperties.Login, ConnectionProperties.Password);
+                request.Method = "POST";
+                byte[] body = Encoding.UTF8.GetBytes(json);
+                request.ContentLength = body.Length;
+                System.Net.ServicePointManager.Expect100Continue = false;
+                using (Stream stream = request.GetRequestStream())
+                {
+                    stream.Write(body, 0, body.Length);
+                    stream.Close();
+                }
+                try
+                {
+                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    {
+                        Stream data = (Stream)response.GetResponseStream();
+
+                        StreamReader reader = new StreamReader(data, Encoding.UTF8);
+                        result = reader.ReadToEnd();
+                    }
+                }
+                catch (WebException e)
+                {
+                    if (((HttpWebResponse)e.Response).StatusCode == HttpStatusCode.NotModified)
+                        result = "304";
+                }
+            }
+            return result;
         }
 
         public void Dispose()

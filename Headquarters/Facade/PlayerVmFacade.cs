@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Documents;
+using Model.Converter;
 using Model.DTO;
 using Model.Entity;
 using Model.Service;
@@ -19,12 +20,13 @@ namespace Headquarters.Facade
         private readonly IPlayerService _playerService;
         private readonly Model.Converter.Converter<Player, PlayerDto> _playerConverter;
 
-        public PlayerVmFacade(IFactionPlayerService fps, IFactionService fs, IPlayerService ps, Model.Converter.Converter<Player, PlayerDto> playerConverter)
+        public PlayerVmFacade(IFactionPlayerService fps, IFactionService fs, IPlayerService ps)
         {
             _factionPlayerService = fps;
             _factionService = fs;
             _playerService = ps;
-            _playerConverter = playerConverter;
+            _playerConverter = new PlayerConverter();
+            //_playerConverter = playerConverter;
         }
 
         public List<PlayerDto> FindPlayers()
@@ -39,7 +41,7 @@ namespace Headquarters.Facade
                 try
                 {
                     FactionPlayer factionPlayer = _factionPlayerService.FindByPlayerId(player.Id);
-                    playerDto.Faction = _factionService.FindFactionById(factionPlayer.FactionId);
+                    playerDto.Faction = _factionService.FindById(factionPlayer.FactionId);
                 }
                 ///TODO переделать catch ошибки на конкретную
                 catch (Exception e)

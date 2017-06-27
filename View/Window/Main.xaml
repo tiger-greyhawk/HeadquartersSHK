@@ -78,7 +78,7 @@
                     <MenuItem.Icon>
                         <Image Source="/View;component/Media/Icon/cog.png"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="{DynamicResource MOptions}" Command="{Binding Path=ShowOptionsWindowCommand}" >
+                    <MenuItem Header="{DynamicResource MOptions}" Command="{Binding Path=ShowAuthOptionsWindowCommand}" >
                         <MenuItem.Icon>
                             <Image Source="/View;component/Media/Icon/cog.png"/>
                         </MenuItem.Icon>

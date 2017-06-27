@@ -1,41 +1,54 @@
 ﻿using System.Runtime.Serialization;
+using Model.DTO;
 
 namespace Model.Entity
 {
     [DataContract]
     public class User
     {
-        [DataMember] private int _id;
-        [DataMember] private string _login;
-        [DataMember] private string _password;
+        [DataMember] private int id;
+        [DataMember] private string login;
+        [DataMember] private string password;
+        [DataMember] private int activePlayerId;
 
-        public User()
+        public User(UserDto userDto)
         {
+            id = userDto.Id;
+            login = userDto.Login;
+            password = userDto.Password;
+            activePlayerId = userDto.ActivePlayer.Id;
         }
 
-        public User(int id, string login, string password)
+        public User(int id, string login, string password, int activePlayerId)
         {
-            _id = id;
-            _login = login;
-            _password = password;
+            this.id = id;
+            this.login = login;
+            this.password = password;
+            this.activePlayerId = activePlayerId;
         }
 
         public int Id
         {
-            get { return _id; }
-            set { _id = value; }
+            get { return id; }
+            set { id = value; }
         }
 
         public string Login
         {
-            get { return _login; }
-            set { _login = value; }
+            get { return login; }
+            set { login = value; }
         }
 
         public string Password
         {
-            get { return _password; }
-            set { _password = value; }
+            get { return password; }
+            set { password = value; }
+        }
+
+        public int ActivePlayerId
+        {
+            get { return activePlayerId; }
+            set { activePlayerId = value; }
         }
     }
 }

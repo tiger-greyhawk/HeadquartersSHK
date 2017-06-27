@@ -11,7 +11,7 @@ namespace Model.DAO
     public interface IPlayerDao //: IExamplePlayerDao
     {
         List<Player> GetAll();
-        List<Player> FindById(int id);
+        Player FindById(int id);
     }
 
     public class PlayerDao : ExamplePlayerDao, IPlayerDao
@@ -36,9 +36,9 @@ namespace Model.DAO
             return new List<Player>(_converterJson.ConvertJsonToPlayers(_restClient.DoGet("player")));
         }
 
-        public List<Player> FindById(int id)
+        public Player FindById(int id)
         {
-            return new List<Player>(_converterJson.ConvertJsonToPlayers(_restClient.DoGet("player/" + id)));
+            return _converterJson.ConvertJsonToPlayer(_restClient.DoGet("player/" + id));
         }
     }
 }

@@ -1,21 +1,35 @@
 ﻿using System.Data;
 using System.Windows.Input;
+using Headquarters.Facade;
 using Headquarters.Root;
 using Model.DTO;
+using Model.Service;
 
 namespace Headquarters.VM
 {
-    public class UserViewModel
+    public interface IUserViewModel
     {
-        public UserDto UserDto { get; }
+        
+    }
+
+    public class UserViewModel: IUserViewModel
+    {
+        public IVMFacade VMFacade { get; }
+        public IUserService UserService { get; }
+
+        public UserDto MyUser { get; set; }
+
         private RelayCommand _acceptCommand;
 
 
-        public UserViewModel(UserDto userDto)
+        public UserViewModel(IVMFacade vmFacade, IUserService userService)
         {
-            UserDto = userDto;
+            VMFacade = vmFacade;
             _acceptCommand = new RelayCommand(Accept);
+            MyUser = VMFacade.Convert(userService.GetMe());
         }
+
+
 
         public ICommand AcceptCommand { get { return _acceptCommand; } }
         public void Accept(object parameter)

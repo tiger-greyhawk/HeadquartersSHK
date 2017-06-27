@@ -2,7 +2,7 @@
 using Model.DTO;
 using Model.Entity;
 
-namespace Model.REST
+namespace Model.Setting
 {
     public class ConnectionProperties
     {
@@ -21,7 +21,7 @@ namespace Model.REST
         //private static string server = "http://shold.tk:8181/backend/";
         //static HttpWebRequest request = (HttpWebRequest)WebRequest.Create(server + "_login");
         private string _sCookies;
-        public ServicePoint spSite;
+        //public ServicePoint spSite;
         public string ConnectionState;
         private bool _connected = false;
 
@@ -43,30 +43,6 @@ namespace Model.REST
             get { return _connected; }
             set { _connected = value; }
         }
-
-
-        /*private string _pathToRest;
-        public string PathToRest
-        {
-            get
-            {
-                switch (_pathToRest)
-                {
-                    case "player":
-                        _pathToRest = "";
-                        break;
-                    case "resource":
-                        _pathToRest = "";
-                        break;
-                    default:
-                        _pathToRest = "";
-                        break;
-                }
-                return _pathToRest;
-            }
-            set { _pathToRest = value; }
-        }
-*/
 
         public ConnectionProperties()
         {

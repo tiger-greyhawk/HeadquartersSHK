@@ -11,7 +11,7 @@ namespace Model.Service
     public interface IFactionService
     {
         List<Faction> GetAllFactions();
-        Faction FindFactionById(int factionId);
+        Faction FindById(int factionId);
     }
 
     public class FactionService: IFactionService
@@ -32,7 +32,7 @@ namespace Model.Service
             return _factions.ToList();
         }
 
-        public Faction FindFactionById(int factionId)
+        public Faction FindById(int factionId)
         {
             return _factions.FirstOrDefault(f => f.Id == factionId);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using Model.Entity;
@@ -23,6 +24,34 @@ namespace Model.Converter
         {
             result = ConvertJsonToFactions(dataToSerialize);
             return result;
+        }
+
+        public User ConvertJsonToUser(string dataToSerialize)
+        {
+
+            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(User));
+            User clear;
+
+            try
+            {
+                clear = (User)json.ReadObject(new System.IO.MemoryStream(Encoding.UTF8.GetBytes(dataToSerialize)));
+            }
+            catch (Exception e)
+            {
+                clear = new User(0, "", "", 0);
+            }
+            return clear;
+        }
+
+        public string ConvertUserToJson(User user)
+        {
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(User));
+            MemoryStream stream1 = new MemoryStream();
+            ser.WriteObject(stream1, user);
+            stream1.Position = 0;
+            StreamReader sr = new StreamReader(stream1);
+            string json = sr.ReadToEnd();
+            return json;
         }
 
         public Player ConvertJsonToPlayer(string dataToSerialize)

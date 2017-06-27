@@ -63,12 +63,14 @@
     <Compile Include="DAO\FactionDao.cs" />
     <Compile Include="DAO\FactionPlayerDao.cs" />
     <Compile Include="DAO\PlayerDao.cs" />
+    <Compile Include="DAO\UserDao.cs" />
     <Compile Include="DTO\FactionDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Entity\Faction.cs" />
     <Compile Include="Entity\FactionPlayer.cs" />
     <Compile Include="Entity\User.cs" />
-    <Compile Include="REST\ConnectionProperties.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="Setting\ConnectionProperties.cs" />
     <Compile Include="REST\RestClient.cs" />
     <Compile Include="Service\FactionPlayerService.cs" />
     <Compile Include="Service\FactionService.cs" />

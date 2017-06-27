@@ -57,6 +57,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base\ViewCommand.cs" />
+    <Compile Include="Window\AuthOptionsWindow.xaml.cs">
+      <DependentUpon>AuthOptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\FactionsWindow.xaml.cs">
+      <DependentUpon>FactionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
@@ -101,6 +107,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\AuthOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\FactionsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

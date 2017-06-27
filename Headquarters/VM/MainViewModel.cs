@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Headquarters.Root;
 using Model.DTO;
 using Model.Entity;
+using Model.Setting;
 using View.Base;
 using View.Window;
 
@@ -14,25 +15,24 @@ namespace Headquarters.VM
         MainViewModel PrepareWindow(IWindow window);
     }
 
-    public class MainViewModel : IMainViewModel
+    public class MainViewModel : MainViewModelCommand, IMainViewModel
     {
-        private IWindow _window;
-        private PlayersWindow _playersWindow;
+        //private IWindow _window;
 
-        private readonly RelayCommand _showRegisterNewUserWindowCommand;
-        private readonly RelayCommand _showPlayersWindowCommand;
-        private readonly RelayCommand _exitCommand;
 
-        public IPlayerViewModel PlayerViewModel { get; }
+        //private ConnectionProperties _connectionProperties;
 
-        public MainViewModel(IPlayerViewModel playerViewModel)
+
+
+        //public IPlayerViewModel PlayerViewModel { get; }
+        //public IFactionViewModel FactionViewModel { get; }
+
+        public MainViewModel(ConnectionProperties connectionProperties, IPlayerViewModel playerViewModel, IFactionViewModel factionViewModel, IUserViewModel userViewModel) : 
+            base(connectionProperties, playerViewModel, factionViewModel, userViewModel)
         {
-            PlayerViewModel = playerViewModel;
-
-
-            _showRegisterNewUserWindowCommand = new RelayCommand(ShowRegisterNewUserWindow);
-            _showPlayersWindowCommand = new RelayCommand(ShowPlayersWindow);
-            _exitCommand = new RelayCommand(Exit);
+            //_connectionProperties = connectionProperties;
+            //PlayerViewModel = playerViewModel;
+            //FactionViewModel = factionViewModel;
         }
 
         /*public MainViewModel(IWindow window, PlayerViewModel playerViewModel)
@@ -43,50 +43,11 @@ namespace Headquarters.VM
 
         public MainViewModel PrepareWindow(IWindow window)
         {
-            _window = window;
+            base._window = window;
+            //_window = window;
             return this;
         }
 
-        public ICommand ShowRegisterNewUserWindowCommand => _showRegisterNewUserWindowCommand;
-        public void ShowRegisterNewUserWindow(object parameter)
-        {
-            RegisterNewUserWindow window = new RegisterNewUserWindow();
-            UserDto newUser = new UserDto(new User());
-
-            if (_window.CreateChildByViewModel(newUser, window).ShowDialog() == true)
-            {
-                //if (_serviceCollection.UserService.SaveUser(newUser).Login == newUser.Login)
-                    MessageBox.Show("", "");
-                //newUser.Save(newUser);
-
-            }
-
-        }
-
-        public ICommand ShowPlayersWindowCommand => _showPlayersWindowCommand;
-        public void ShowPlayersWindow(object parameter)
-        {
-            try
-            {
-                _window.CreateChildByViewModel(PlayerViewModel, _playersWindow).Show();
-            }
-            catch (NullReferenceException e)
-            {
-                _playersWindow = new PlayersWindow();
-                _window.CreateChildByViewModel(PlayerViewModel, _playersWindow).Show();
-            }
-            catch (InvalidOperationException e)
-            {
-                _playersWindow = new PlayersWindow();
-                _window.CreateChildByViewModel(PlayerViewModel, _playersWindow).Show();
-            }
-        }
-
-        public ICommand ExitCommand => _exitCommand; 
-        public void Exit(object parameter)
-        {
-            _window.Close();
-            Application.Current.Shutdown();
-        }
+        
     }
 }

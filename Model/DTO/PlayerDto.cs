@@ -8,6 +8,7 @@ namespace Model.DTO
         public int UserId { get; set; }
         public string Nick { get; set; }
         public Faction Faction { get; set; }
+        public string Avatar { get; set; }
 
         /*public PlayerDto()
         {

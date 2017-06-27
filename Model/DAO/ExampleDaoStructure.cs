@@ -39,7 +39,7 @@ namespace Model.DAO
 
         public List<T> FindAll(string path, List<T> objects)
         {
-            _converterJson.Convert(path, objects);
+            //_converterJson.Convert(path, objects);
             //return (List<T>)_converterJson.ConvertJsonToPlayers(_restClient.DoGet(path));
             return (List<T>)_converterJson.ConvertJsonToPlayers(_restClient.DoGet(path));
         }

@@ -22,6 +22,22 @@ namespace Model.Converter
         }
     }
 
+    public class UserConverter : Converter<User, UserDto>, Converter<UserDto, User>
+    {
+        public UserDto convert(User user)
+        {
+            //Player activePlayer = 
+            UserDto userDto = new UserDto(user.Id, user.Login, user.Password, new Player(0,0,""));
+            return userDto;
+        }
+
+        public User convert(UserDto userDto)
+        {
+            User user = new User(userDto);
+            return user;
+        }
+    }
+
     public class PlayerConverter : Converter<Player, PlayerDto>, Converter<PlayerDto, Player>
     {
         public PlayerDto convert(Player player)
@@ -37,7 +53,45 @@ namespace Model.Converter
         }
     }
 
-    
+    public class FactionConverter : Converter<Faction, FactionDto>, Converter<FactionDto, Faction>
+    {
+        public FactionDto convert(Faction faction)
+        {
+            FactionDto factionDto = new FactionDto(
+                faction.Id, 
+                faction.HouseId,
+                faction.Name,
+                faction.Owner,
+                faction.Officer1,
+                faction.Officer2,
+                faction.Officer3,
+                faction.Officer4,
+                faction.Officer5,
+                faction.OfficerChat,
+                faction.BasicChat
+                );
+            return factionDto;
+        }
+
+        public Faction convert(FactionDto factionDto)
+        {
+            Faction faction = new Faction(
+                factionDto.Id,
+                factionDto.HouseId,
+                factionDto.Name,
+                factionDto.Owner,
+                factionDto.officer1,
+                factionDto.officer2,
+                factionDto.officer3,
+                factionDto.officer4,
+                factionDto.officer5,
+                factionDto.officerChat,
+                factionDto.basicChat
+                );
+            return faction;
+        }
+    }
+
 
     public class Mapper
     {

@@ -22,12 +22,12 @@
             <StackPanel Orientation="Horizontal">
                 <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Content="{DynamicResource OptionsLogin}" />
                 <Label>:</Label>
-                <TextBox VerticalAlignment="Center" Width="100" Text="{Binding Path=Login, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox VerticalAlignment="Center" Width="100" Text="{Binding Path=MyUser.Login, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Content="{DynamicResource OptionsPassword}"  />
                 <Label>:</Label>
-                <TextBox VerticalAlignment="Center" Width="100" Text="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox VerticalAlignment="Center" Width="100" Text="{Binding Path=MyUser.Password, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
             <GridSplitter Height="30"></GridSplitter>
             <Grid HorizontalAlignment="Center">
