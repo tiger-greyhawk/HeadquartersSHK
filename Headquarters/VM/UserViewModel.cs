@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Windows.Input;
 using Headquarters.Facade;
 using Headquarters.Root;
@@ -9,7 +10,7 @@ namespace Headquarters.VM
 {
     public interface IUserViewModel
     {
-        
+        void SaveUser();
     }
 
     public class UserViewModel: IUserViewModel
@@ -25,11 +26,16 @@ namespace Headquarters.VM
         public UserViewModel(IVMFacade vmFacade, IUserService userService)
         {
             VMFacade = vmFacade;
+            UserService = userService;
             _acceptCommand = new RelayCommand(Accept);
             MyUser = VMFacade.Convert(userService.GetMe());
         }
 
-
+        public void SaveUser()
+        {
+            UserService.Save(VMFacade.Convert(MyUser));
+            throw new NotImplementedException();
+        }
 
         public ICommand AcceptCommand { get { return _acceptCommand; } }
         public void Accept(object parameter)

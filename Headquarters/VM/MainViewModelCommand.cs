@@ -61,6 +61,7 @@ namespace Headquarters.VM
             if (_window.CreateChildByViewModel(UserViewModel, window).ShowDialog() == true)
             {
                 //if (_serviceCollection.UserService.SaveUser(newUser).Login == newUser.Login)
+                this.UserViewModel.SaveUser();
                 MessageBox.Show("", "");
                 //newUser.Save(newUser);
 

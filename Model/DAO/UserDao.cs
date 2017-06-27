@@ -1,4 +1,5 @@
-﻿using Model.Converter;
+﻿using System;
+using Model.Converter;
 using Model.DTO;
 using Model.Entity;
 using Model.REST;
@@ -9,6 +10,7 @@ namespace Model.DAO
     {
         User GetMe();
         User CreateUser(User userToCreate);
+        void Save(User userToUpdate);
     }
 
     public class UserDao : IUserDao
@@ -30,6 +32,11 @@ namespace Model.DAO
         public User CreateUser(User userToCreate)
         {
             return _converterJson.ConvertJsonToUser(_restClient.DoPostAsync(_converterJson.ConvertUserToJson(userToCreate), "/user/register"));
+        }
+
+        public void Save(User userToUpdate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

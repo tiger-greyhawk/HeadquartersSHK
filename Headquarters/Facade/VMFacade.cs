@@ -8,6 +8,7 @@ namespace Headquarters.Facade
     public interface IVMFacade
     {
         UserDto Convert(User user);
+        User Convert(UserDto userDto);
     }
     public class VMFacade : IVMFacade
     {
@@ -35,6 +36,13 @@ namespace Headquarters.Facade
             UserDto userDto = _userConverter.convert(user);
             
             return userDto;
+        }
+
+        public User Convert(UserDto userDto)
+        {
+            User user = _userConverter.convert(userDto);
+            user.ActivePlayerId = userDto.ActivePlayer.Id;
+            return user;
         }
     }
 }

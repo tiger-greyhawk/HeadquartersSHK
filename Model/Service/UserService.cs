@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Model.DAO;
+using Model.DTO;
 using Model.Entity;
 
 namespace Model.Service
@@ -8,6 +9,7 @@ namespace Model.Service
     {
         User GetMe();
         void UpdateCache();
+        void Save(User user);
     }
 
     public class UserService : IUserService
@@ -37,6 +39,11 @@ namespace Model.Service
         public void UpdateCache()
         {
             _user = _userDao.GetMe();
+        }
+
+        public void Save(User user)
+        {
+            _userDao.Save(user);
         }
     }
 }
